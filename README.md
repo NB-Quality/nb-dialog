@@ -1,3 +1,5 @@
+This is for specifically for Chinese. 
+
 ## exports
 ```
 exports["nb-dialog"]:Input(title) -- (title,maxlength,x,y)
