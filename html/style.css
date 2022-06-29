@@ -1,0 +1,6 @@
+/* This applies to all elements (bad practice) */
+body {
+	overflow:hidden;
+	
+}
+

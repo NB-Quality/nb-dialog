@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="reset.css" type="text/css">
+		<link rel="stylesheet" href="style.css" type="text/css">
+		<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+		<script src="./vue.js"></script>
+        
+	</head>
+	<body>
+		<div id="app" >
+		
+		<div id="debug" v-if="debug" v-bind:style="{ 
+		  position:`absolute`,
+          left: `5%`,
+          top: `5%`,
+          height: `50px`,
+          width: `1000px`,
+		  color: `white`,
+		  opacity: `${opacity}.0`         
+		  
+        }">ADDING: {{ addingText }}</div>
+		
+        <input id="haho" type="text" value="" v-if="active" v-model="inputedText" v-on:select="checkSelect($event)" v-on:keyup.enter="checkEnter($event)" v-on:keyup.delete="checkDelete($event)" v-bind:style="{ 
+		  position:`absolute`,
+          left: `${x}%`,
+          top: `${y}%`,
+          height: `${height}px`,
+          width: `${width}px`,
+		  opacity: `${opacity}.0`         
+		  
+        }" v-focus>
+		</div>
+		<script src="./listener.js" type="text/javascript"></script>
+	</body>
+</html>
