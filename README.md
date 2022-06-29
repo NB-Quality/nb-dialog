@@ -1,4 +1,4 @@
-This is for specifically for Chinese. 
+This is for specifically for Chinese/Japanese/Korean/Non English. 
 
 ## exports
 ```
