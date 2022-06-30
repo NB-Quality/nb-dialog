@@ -1,14 +1,14 @@
 local Loop = nil
 local Empty = ""
 local current_chars = 0 
-local _showkeyboard = function(title,text) DisplayOnscreenKeyboard(1, "nb-dialog:title", "", text, Empty,Empty,Empty, current_chars) end 	
+local _showkeyboard = function(title,text)  DisplayOnscreenKeyboard(6, "nb-dialog:title", "", text, Empty,Empty,Empty, current_chars) end 	
 local _cancelkeyboard = CancelOnscreenKeyboard
-local _clearkeyboard = function() _showkeyboard("nb-dialog:title",Empty) end 
+local _clearkeyboard = function(str) _showkeyboard("nb-dialog:title",Empty) _showkeyboard("nb-dialog:title",str) end 
 local _addchar = function(length) current_chars = current_chars + length end 
 local _deletechar = function() if current_chars > 0 then current_chars = current_chars - 1 end  end
 local _clearchar = function() current_chars = 0 end 
 local isPasswordMode = false 
-local OpenKeyboard = function()
+local OpenKeyboard = function(x)
     PlaySound(-1, "SELECT", "HUD_FRONTEND_DEFAULT_SOUNDSET", 0, 0, 1)
     if not Loop then Loop = PepareLoop(100) 
         Loop(function()
@@ -17,7 +17,7 @@ local OpenKeyboard = function()
             })
         end)
     end 
-	_clearkeyboard()
+	_clearkeyboard(x)
 	_clearchar()
 end 
 
@@ -71,7 +71,7 @@ RegisterNUICallback("enter", function(data, cb)
     ReturnKeyboard(data.string)
 	SetNuiFocus(false, false) cb('ok')
 end)
-Input = function(title,maxlength,x,y)
+Input = function(title,maxlength,defaulttxt,x,y)
     isPasswordMode = false 
     AddTextEntry('nb-dialog:title', title)
 	SendNUIMessage({
@@ -87,7 +87,7 @@ Input = function(title,maxlength,x,y)
             action    = 'setMaxLength',
             maxlength = maxlength or 20
     })
-    OpenKeyboard()
+    OpenKeyboard(defaulttxt)
 	SetNuiFocus(true, false)
     current_promise = promise.new()
     return Citizen.Await(current_promise)
@@ -113,3 +113,9 @@ Password = function(title,maxlength,x,y)
     current_promise = promise.new()
     return Citizen.Await(current_promise)
 end
+
+
+
+RegisterCommand("test",function()
+    Input("test",20)
+end,false)
