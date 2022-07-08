@@ -10,7 +10,7 @@ local _clearchar = function() current_chars = 0 end
 local isPasswordMode = false 
 local OpenKeyboard = function(x)
     PlaySound(-1, "SELECT", "HUD_FRONTEND_DEFAULT_SOUNDSET", 0, 0, 1)
-    if not Loop then Loop = PepareLoop(100) 
+    if not Loop then Loop = LoopParty(100) 
         Loop(function()
             SendNUIMessage({
                 action    = 'updateFocus'
